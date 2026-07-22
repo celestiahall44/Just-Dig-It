@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import sitePrepImage from './assets/SitePrep.png';
+import septicSystemImage from './assets/SepticSystem.png';
+import drivewayImage from './assets/Driveway.png';
 import rockPathwayImage from './assets/RockPathway.png';
-import rockWallImage from './assets/RockWall.jpg';
-import landscapingPartnerImage from './assets/LanscapingPartner.jpg';
+import rockWallImage from './assets/RockWall.png';
+import landscapingPartnerImage from './assets/LandscapingPartner.png';
 
 function App() {
   const reviews = [
@@ -114,13 +116,23 @@ function App() {
                 Prepare your property for construction with reliable site preparation and excavation services. We handle land clearing, grading, trenching, foundation excavation, and site leveling with precision and efficiency, ensuring your project begins on stable, properly prepared ground.
               </p>
             </article>
-            <article>
+            <article
+              className="service-card-septic"
+              style={{
+                backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.66), rgba(10, 12, 14, 0.66)), url(${septicSystemImage})`,
+              }}
+            >
               <h3>Septic System</h3>
               <p>
                 In Lake County, from new septic system installation to excavation for repairs and replacements, we provide dependable services that meet project requirements while ensuring your property is prepared for long-lasting performance.
               </p>
             </article>
-            <article>
+            <article
+              className="service-card-driveway"
+              style={{
+                backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.66), rgba(10, 12, 14, 0.66)), url(${drivewayImage})`,
+              }}
+            >
               <h3>Driveways</h3>
               <p>
                 Create a durable, well-built driveway with professional excavation, grading, and gravel installation. We focus on proper drainage and a solid foundation to deliver a driveway that stands up to everyday use.

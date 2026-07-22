@@ -268,7 +268,8 @@ p {
   border-radius: 14px;
   padding: 1rem;
   background: linear-gradient(180deg, #2a3137, #1b2025);
-  border: 1px solid rgba(156, 163, 169, 0.16);
+  border: none;
+  box-shadow: 0 0 16px rgba(234, 139, 31, 0.09);
 }
 
 .service-card-rock-pathway {
@@ -278,13 +279,37 @@ p {
 }
 
 .service-card-site-prep {
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .service-card-site-prep h3,
 .service-card-site-prep p {
+  color: var(--white);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+.service-card-septic {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.service-card-septic h3,
+.service-card-septic p {
+  color: var(--white);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+.service-card-driveway {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.service-card-driveway h3,
+.service-card-driveway p {
   color: var(--white);
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
 }
