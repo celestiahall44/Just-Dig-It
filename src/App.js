@@ -163,7 +163,7 @@ function App() {
             <article
               className="service-card-landscaping"
               style={{
-                backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.66), rgba(10, 12, 14, 0.66)), url(${landscapingPartnerImage})`,
+                backgroundImage: `url(${landscapingPartnerImage})`,
               }}
             >
               <h3>Landscaping, Tree Removal & Lot Clean Up</h3>
