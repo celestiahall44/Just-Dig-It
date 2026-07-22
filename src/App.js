@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import heroLogoImage from './assets/NOBGLogo.png';
 import sitePrepImage from './assets/SitePrep.png';
 import septicSystemImage from './assets/SepticSystem.png';
 import drivewayImage from './assets/Driveway.png';
@@ -15,7 +16,7 @@ function App() {
     },
     {
       quote:
-        'I highly recommend Just Dig It Excavating. Alan Eastman was responsive, professional, and efficient from start to finish. Communication was excellent, he showed up when he said he would, and the work was completed quickly and to a high standard. It’s refreshing to work with a contractor who is dependable and takes pride in doing the job right. I wouldn’t hesitate to use Just Dig It Excavating again or recommend Alan to anyone needing excavation work.',
+        '"I highly recommend Just Dig It Excavating. Alan Eastman was responsive, professional, and efficient from start to finish. Communication was excellent, he showed up when he said he would, and the work was completed quickly and to a high standard. It’s refreshing to work with a contractor who is dependable and takes pride in doing the job right. I wouldn’t hesitate to use Just Dig It Excavating again or recommend Alan to anyone needing excavation work."',
       name: 'Ronald H.',
     },
     {
@@ -27,7 +28,8 @@ function App() {
       name: 'Nate N.',
     },
     {
-      quote: 'ON THE WAY',
+      quote:
+        '"Working with Alan was an amazing experience. From the very beginning, he took the time to understand exactly what I wanted. He was professional, honest, and always willing to answer my questions or offer suggestions that made the project even better. He truly went above and beyond, paying attention to the little details and making sure everything was done the right way, not just the easy way. It\'s hard to find someone who genuinely cares about their work and their customers the way Alan does. I would recommend him to anyone without hesitation and will absolutely be calling him again for future projects."',
       name: 'Celestia H.',
     },
   ];
@@ -69,10 +71,10 @@ function App() {
       <header className="topbar">
         <div className="brand">JUST DIG IT</div>
         <nav className="nav-links">
+          <a href="#about">About</a>
           <a href="#services">Services</a>
           <a href="#projects">Projects</a>
           <a href="#reviews">Reviews</a>
-          <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
         <a className="call-now" href="tel:+15551234567">Call Now</a>
@@ -81,22 +83,37 @@ function App() {
       <main>
         <section className="hero" id="top">
           <div className="hero-content">
-            <p className="eyebrow">Licensed. Bonded. Local.</p>
             <h1>Dirt Work Services You Can Count On</h1>
+            <img className="hero-logo" src={heroLogoImage} alt="Just Dig It logo" />
+            <p className="eyebrow">Licensed. Insured. Local.</p>
+            
             <p>
-              From first cut to final grade, we handle excavation, site preparation,
+              From first cut to final grade, capable and confident in excavation, site preparation,
               and septic system installs with clean execution and tight timelines.
             </p>
             <div className="hero-actions">
               <a className="btn btn-primary" href="#contact">Get a Free Estimate</a>
               <a className="btn btn-secondary" href="#services">Explore Services</a>
             </div>
-            <ul className="hero-stats">
-              <li><strong>18+</strong><span>Years Experience</span></li>
-              <li><strong>600+</strong><span>Projects Completed</span></li>
-              <li><strong>24hr</strong><span>Emergency Response</span></li>
-            </ul>
           </div>
+        </section>
+
+        <section className="about" id="about">
+          <div>
+            <p className="eyebrow">Why Choose Us</p>
+            <h2>Clear Communication.  Solid Results.</h2>
+            <p>
+              We partner with homeowners, builders, and developers who need dependable
+              heavy civil work and no excuses. Every project gets practical planning,
+              transparent scheduling. Ready to dig in and deliver results.
+            </p>
+          </div>
+          <ul>
+            <li>Fully insured and bondable upon request</li>
+            <li>Quality equipment paired with skilled workmanship</li>
+            <li>Permit and inspection coordination support</li>
+            <li>Detailed bids and realistic timelines</li>
+          </ul>
         </section>
 
         <section className="services" id="services">
@@ -218,9 +235,7 @@ function App() {
                 <p className="review-quote">{review.quote}</p>
                 <div className="review-meta">
                   <strong>{review.name}</strong>
-                  <span>
-                    Review {index + 1} of {reviews.length}
-                  </span>
+                  <span>★★★★★</span>
                 </div>
               </article>
             ))}
@@ -242,9 +257,7 @@ function App() {
               <p className="review-quote">{reviews[activeReviewIndex].quote}</p>
               <div className="review-meta">
                 <strong>{reviews[activeReviewIndex].name}</strong>
-                <span>
-                  Review {activeReviewIndex + 1} of {reviews.length}
-                </span>
+                <span>★★★★★</span>
               </div>
             </article>
             <button
@@ -256,24 +269,6 @@ function App() {
               &gt;
             </button>
           </div>
-        </section>
-
-        <section className="about" id="about">
-          <div>
-            <p className="eyebrow">Why Clients Choose Us</p>
-            <h2>Clear Communication. Clean Worksites. Solid Results.</h2>
-            <p>
-              We partner with homeowners, builders, and developers who need dependable
-              heavy civil work and no excuses. Every project gets practical planning,
-              transparent scheduling, and crews that show up ready to move dirt.
-            </p>
-          </div>
-          <ul>
-            <li>Fully insured crews and operators</li>
-            <li>Modern equipment with GPS grading capabilities</li>
-            <li>Permit and inspection coordination support</li>
-            <li>Detailed bids and realistic timelines</li>
-          </ul>
         </section>
 
         <section className="contact" id="contact">
