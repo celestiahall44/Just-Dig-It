@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import heroLogoImage from './assets/NOBGLogo.png';
 import heroBackgroundImage from './assets/Hero.png';
 import sitePrepImage from './assets/SitePrep.png';
@@ -17,6 +20,9 @@ import septicProjectImage from './assets/Septic.jpeg';
 import wallProjectImage from './assets/Wall.jpeg';
 
 function App() {
+  const EMAILJS_SERVICE_ID = 'service_maxm47m';
+  const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'template_wtxo4hk';
+  const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'PunT1yUjK2-xsBH1z';
   const reviews = [
     {
       quote:
@@ -28,6 +34,7 @@ function App() {
         '"I highly recommend Just Dig It Excavating. Alan Eastman was responsive, professional, and efficient from start to finish. Communication was excellent, he showed up when he said he would, and the work was completed quickly and to a high standard. It’s refreshing to work with a contractor who is dependable and takes pride in doing the job right. I wouldn’t hesitate to use Just Dig It Excavating again or recommend Alan to anyone needing excavation work."',
       name: 'Ronald H.',
     },
+    /*
     {
       quote: 'ON THE WAY',
       name: 'Joslyn S.',
@@ -36,6 +43,7 @@ function App() {
       quote: 'ON THE WAY',
       name: 'Nate N.',
     },
+    */
     {
       quote:
         '"Working with Alan was an amazing experience. From the very beginning, he took the time to understand exactly what I wanted. He was professional, honest, and always willing to answer my questions or offer suggestions that made the project even better. He truly went above and beyond, paying attention to the little details and making sure everything was done the right way, not just the easy way. It\'s hard to find someone who genuinely cares about their work and their customers the way Alan does. I would recommend him to anyone without hesitation and will absolutely be calling him again for future projects."',
@@ -47,6 +55,8 @@ function App() {
   const [activeProjectImageIndex, setActiveProjectImageIndex] = useState(0);
   const [previousProjectImageIndex, setPreviousProjectImageIndex] = useState(0);
   const [isProjectFading, setIsProjectFading] = useState(false);
+  const [isSendingContact, setIsSendingContact] = useState(false);
+  const [contactSubmitMessage, setContactSubmitMessage] = useState('');
   const reviewMeasureRefs = useRef([]);
   const PROJECT_ROTATE_MS = 5200;
   const PROJECT_FADE_MS = 5000;
@@ -57,6 +67,15 @@ function App() {
     septicProjectImage,
     wallProjectImage,
   ];
+
+  useEffect(() => {
+    AOS.init({
+      duration: 900,
+      easing: 'ease-out-cubic',
+      once: false,
+      offset: 80,
+    });
+  }, []);
 
   useEffect(() => {
     const updateReviewCardHeight = () => {
@@ -114,6 +133,42 @@ function App() {
     );
   };
 
+  const handleContactSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+
+    if (!form.checkValidity()) {
+      setContactSubmitMessage('Please fill in all required information.');
+      return;
+    }
+
+    if (!EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      setContactSubmitMessage('Email is not configured yet. Add EmailJS template ID and public key.');
+      return;
+    }
+
+    setIsSendingContact(true);
+    setContactSubmitMessage('');
+
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        form,
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+
+      form.reset();
+      setContactSubmitMessage('Message Sent!');
+    } catch (error) {
+      const errorText = error?.text || error?.message || 'Unknown EmailJS error';
+      console.error('EmailJS send failed:', error);
+      setContactSubmitMessage(`Unable to send request: ${errorText}`);
+    } finally {
+      setIsSendingContact(false);
+    }
+  };
+
   return (
     <div className="site-shell">
       <header className="topbar">
@@ -154,7 +209,7 @@ function App() {
           </div>
         </section>
 
-        <section className="about" id="about">
+        <section className="about" id="about" data-aos="fade-up">
           <div>
             <p className="eyebrow">Why Choose Us</p>
             <h2>
@@ -176,7 +231,7 @@ function App() {
           </ul>
         </section>
 
-        <section className="quality-statement" aria-label="Quality statement">
+        <section className="quality-statement" aria-label="Quality statement" data-aos="zoom-in">
           <p>Integrity Below Ground. Excellence Above.</p>
         </section>
 
@@ -188,6 +243,9 @@ function App() {
           <div className="service-grid">
             <article
               className="service-card-site-prep"
+              data-aos="flip-up"
+              data-aos-delay="0"
+              data-aos-duration="1000"
               style={{
                 backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.66), rgba(10, 12, 14, 0.66)), url(${sitePrepImage})`,
               }}
@@ -199,6 +257,9 @@ function App() {
             </article>
             <article
               className="service-card-septic"
+              data-aos="flip-up"
+              data-aos-delay="150"
+              data-aos-duration="1000"
               style={{
                 backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.66), rgba(10, 12, 14, 0.66)), url(${septicSystemImage})`,
               }}
@@ -210,6 +271,9 @@ function App() {
             </article>
             <article
               className="service-card-driveway"
+              data-aos="flip-up"
+              data-aos-delay="300"
+              data-aos-duration="1000"
               style={{
                 backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.66), rgba(10, 12, 14, 0.66)), url(${drivewayImage})`,
               }}
@@ -221,6 +285,9 @@ function App() {
             </article>
             <article
               className="service-card-rock-wall"
+              data-aos="flip-up"
+              data-aos-delay="450"
+              data-aos-duration="1000"
               style={{
                 backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.66), rgba(10, 12, 14, 0.66)), url(${rockWallImage})`,
               }}
@@ -232,6 +299,9 @@ function App() {
             </article>
             <article
               className="service-card-rock-pathway"
+              data-aos="flip-up"
+              data-aos-delay="600"
+              data-aos-duration="1000"
               style={{
                 backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.66), rgba(10, 12, 14, 0.66)), url(${rockPathwayImage})`,
               }}
@@ -243,6 +313,9 @@ function App() {
             </article>
             <article
               className="service-card-landscaping"
+              data-aos="flip-up"
+              data-aos-delay="750"
+              data-aos-duration="1000"
               style={{
                 backgroundImage: `url(${landscapingPartnerImage})`,
               }}
@@ -255,7 +328,7 @@ function App() {
           </div>
         </section>
 
-        <section className="projects" id="projects">
+        <section className="projects" id="projects" data-aos="fade-up">
           <div className="section-head">
             <p>Recent Work</p>
             <h2>Built On Precision</h2>
@@ -280,11 +353,11 @@ function App() {
           </div>
         </section>
 
-        <section className="quality-statement" aria-label="Quality statement">
+        <section className="quality-statement" aria-label="Quality statement" data-aos="zoom-in">
           <p>No Shortcuts. No Compromises. Just Quality Work.</p>
         </section>
 
-        <section className="reviews" id="reviews">
+        <section className="reviews" id="reviews" data-aos="fade-up">
           <div className="section-head">
             <p>Client Feedback</p>
             <h2>Reviews From The Field</h2>
@@ -337,7 +410,7 @@ function App() {
           </div>
         </section>
 
-        <section className="owner-bio" id="owner">
+        <section className="owner-bio" id="owner" data-aos="fade-up">
           <img
             className="owner-photo"
             src={ownerPhotoImage}
@@ -355,6 +428,7 @@ function App() {
         <section
           className="contact"
           id="contact"
+          data-aos="fade-up"
           style={{
             backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.78), rgba(10, 12, 14, 0.78)), url(${mountainsImage})`,
             backgroundSize: 'cover',
@@ -370,12 +444,12 @@ function App() {
               discuss constraints, and provide you with a straightforward estimate.
             </p>
           </div>
-          <form className="contact-form" onSubmit={(event) => event.preventDefault()}>
+          <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
             <label htmlFor="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Your name" />
+            <input id="name" name="name" type="text" placeholder="Your name" required />
 
             <label htmlFor="phone">Phone</label>
-            <input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" />
+            <input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" required />
 
             <label htmlFor="details">Project Details</label>
             <textarea
@@ -383,9 +457,13 @@ function App() {
               name="details"
               rows="4"
               placeholder="Excavation, site prep, or septic work needed..."
+              required
             />
 
-            <button type="submit" className="btn btn-primary">Send Request</button>
+            <button type="submit" className="btn btn-primary" disabled={isSendingContact}>
+              {isSendingContact ? 'Sending...' : 'Send Request'}
+            </button>
+            {contactSubmitMessage && <p className="contact-submit-message">{contactSubmitMessage}</p>}
           </form>
         </section>
       </main>
