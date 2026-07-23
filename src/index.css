@@ -177,8 +177,35 @@ main {
   height: auto;
   object-fit: contain;
   margin: 0 auto 0.4rem;
-  transform-origin: center center;
-  animation: logoSlamIn 1.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-content > h1,
+.hero-content > .hero-logo,
+.hero-content > .eyebrow,
+.hero-content > p:not(.eyebrow),
+.hero-content > .hero-actions {
+  opacity: 0;
+  animation: logoFadeIn 4s ease both;
+}
+
+.hero-content > h1 {
+  animation-delay: 0.05s;
+}
+
+.hero-content > .hero-logo {
+  animation-delay: 0.2s;
+}
+
+.hero-content > .eyebrow {
+  animation-delay: 0.35s;
+}
+
+.hero-content > p:not(.eyebrow) {
+  animation-delay: 0.5s;
+}
+
+.hero-content > .hero-actions {
+  animation-delay: 0.65s;
 }
 
 .hero-content h1 {
@@ -746,28 +773,13 @@ footer p {
   }
 }
 
-@keyframes logoSlamIn {
+@keyframes logoFadeIn {
   0% {
     opacity: 0;
-    transform: scale(0.2);
-  }
-
-  65% {
-    opacity: 1;
-    transform: scale(1.12);
-  }
-
-  82% {
-    transform: scale(0.97);
-  }
-
-  92% {
-    transform: scale(1.015);
   }
 
   100% {
     opacity: 1;
-    transform: scale(1);
   }
 }
 

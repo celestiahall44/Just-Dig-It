@@ -18,6 +18,10 @@ import landingPadImage from './assets/LandingPad.jpg';
 import meterImage from './assets/Meter.jpeg';
 import septicProjectImage from './assets/Septic.jpeg';
 import wallProjectImage from './assets/Wall.jpeg';
+import drivewayProjectImage from './assets/Driveway.jpg';
+import foundationProjectImage from './assets/Foundation.jpg';
+import septicProjectImageTwo from './assets/Septic2.jpeg';
+import septicProjectImageThree from './assets/Septic3.jpeg';
 
 function App() {
   const EMAILJS_SERVICE_ID = 'service_maxm47m';
@@ -66,6 +70,10 @@ function App() {
     meterImage,
     septicProjectImage,
     wallProjectImage,
+    drivewayProjectImage,
+    foundationProjectImage,
+    septicProjectImageTwo,
+    septicProjectImageThree,
   ];
 
   useEffect(() => {
