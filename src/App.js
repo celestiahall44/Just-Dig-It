@@ -10,6 +10,11 @@ import landscapingPartnerImage from './assets/LandscapingPartner.png';
 import ownerPhotoImage from './assets/BioPhoto.jpg';
 import mountainsImage from './assets/Mountains.png';
 import justDigItTextLogoImage from './assets/JustDigItTextLogo.png';
+import benchImage from './assets/Bench.jpeg';
+import landingPadImage from './assets/LandingPad.jpg';
+import meterImage from './assets/Meter.jpeg';
+import septicProjectImage from './assets/Septic.jpeg';
+import wallProjectImage from './assets/Wall.jpeg';
 
 function App() {
   const reviews = [
@@ -39,7 +44,19 @@ function App() {
   ];
   const [activeReviewIndex, setActiveReviewIndex] = useState(0);
   const [reviewCardHeight, setReviewCardHeight] = useState(null);
+  const [activeProjectImageIndex, setActiveProjectImageIndex] = useState(0);
+  const [previousProjectImageIndex, setPreviousProjectImageIndex] = useState(0);
+  const [isProjectFading, setIsProjectFading] = useState(false);
   const reviewMeasureRefs = useRef([]);
+  const PROJECT_ROTATE_MS = 5200;
+  const PROJECT_FADE_MS = 5000;
+  const projectImages = [
+    benchImage,
+    landingPadImage,
+    meterImage,
+    septicProjectImage,
+    wallProjectImage,
+  ];
 
   useEffect(() => {
     const updateReviewCardHeight = () => {
@@ -57,6 +74,33 @@ function App() {
 
     return () => window.removeEventListener('resize', updateReviewCardHeight);
   }, []);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setActiveProjectImageIndex((currentIndex) =>
+        {
+          const nextIndex = currentIndex === projectImages.length - 1 ? 0 : currentIndex + 1;
+          setPreviousProjectImageIndex(currentIndex);
+          setIsProjectFading(true);
+          return nextIndex;
+        }
+      );
+    }, PROJECT_ROTATE_MS);
+
+    return () => window.clearInterval(intervalId);
+  }, [projectImages.length, PROJECT_ROTATE_MS]);
+
+  useEffect(() => {
+    if (!isProjectFading) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setIsProjectFading(false);
+    }, PROJECT_FADE_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [isProjectFading, PROJECT_FADE_MS]);
 
   const showPreviousReview = () => {
     setActiveReviewIndex((currentIndex) =>
@@ -209,24 +253,20 @@ function App() {
             <h2>Built On Precision</h2>
           </div>
           <div className="project-list">
-            <div>
-              <h3>Hillside Home Cut-In</h3>
-              <p>
-                Complete cut, retaining prep, and drainage trenching for a steep access build.
-              </p>
-            </div>
-            <div>
-              <h3>Commercial Pad & Utilities</h3>
-              <p>
-                Multi-phase grading and underground utility routing completed ahead of schedule.
-              </p>
-            </div>
-            <div>
-              <h3>Rural Septic Replacement</h3>
-              <p>
-                Full tank swap and drain field redesign with minimal disruption to property use.
-              </p>
-            </div>
+            <article className="project-photo-card">
+              {isProjectFading && (
+                <img
+                  src={projectImages[previousProjectImageIndex]}
+                  alt={`Project work photo ${previousProjectImageIndex + 1}`}
+                  className="project-photo project-photo-previous"
+                />
+              )}
+              <img
+                src={projectImages[activeProjectImageIndex]}
+                alt={`Project work photo ${activeProjectImageIndex + 1}`}
+                className={`project-photo project-photo-current${isProjectFading ? ' is-fading' : ''}`}
+              />
+            </article>
           </div>
         </section>
 
