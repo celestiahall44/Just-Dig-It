@@ -1,17 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import heroLogoImage from './assets/NOBGLogo.png';
+import heroBackgroundImage from './assets/Hero.png';
 import sitePrepImage from './assets/SitePrep.png';
 import septicSystemImage from './assets/SepticSystem.png';
 import drivewayImage from './assets/Driveway.png';
 import rockPathwayImage from './assets/RockPathway.png';
 import rockWallImage from './assets/RockWall.png';
 import landscapingPartnerImage from './assets/LandscapingPartner.png';
+import ownerPhotoImage from './assets/BioPhoto.jpg';
+import mountainsImage from './assets/Mountains.png';
+import justDigItTextLogoImage from './assets/JustDigItTextLogo.png';
 
 function App() {
   const reviews = [
     {
       quote:
-        "I have hired Alan’s company on numerous occasions to assist with earthworks projects. He is one of the friendliest, kindest and most patient contractors I've had the pleasure of working with. Typically, he spends time understanding what I need as a customer and will talk through and walk through the project. From there, he has always been timely in responding with a professional quote and explanation of next steps. One of the most important qualities as a business owner is communication. Alan stays in close touch with his customers to provide updates, get input and set expectations. This is something I value greatly. In terms of the quality of his work, it is evident that Alan knows excavation, ground control, survey, and safe operations. I've had quality work output from his company every time I have hired them. I look forward to many more years in partnering as my projects arise.",
+        `"I have hired Alan’s company on numerous occasions to assist with earthworks projects. He is one of the friendliest, kindest and most patient contractors I've had the pleasure of working with. Typically, he spends time understanding what I need as a customer and will talk through and walk through the project. From there, he has always been timely in responding with a professional quote and explanation of next steps. One of the most important qualities as a business owner is communication. Alan stays in close touch with his customers to provide updates, get input and set expectations. This is something I value greatly. In terms of the quality of his work, it is evident that Alan knows excavation, ground control, survey, and safe operations. I've had quality work output from his company every time I have hired them. I look forward to many more years in partnering as my projects arise."`,
       name: 'Rhonda Z.',
     },
     {
@@ -69,7 +73,9 @@ function App() {
   return (
     <div className="site-shell">
       <header className="topbar">
-        <div className="brand">JUST DIG IT</div>
+        <a className="brand" href="#top" aria-label="Back to top">
+          <img src={justDigItTextLogoImage} alt="Just Dig It text logo" />
+        </a>
         <nav className="nav-links">
           <a href="#about">About</a>
           <a href="#services">Services</a>
@@ -81,7 +87,13 @@ function App() {
       </header>
 
       <main>
-        <section className="hero" id="top">
+        <section
+          className="hero"
+          id="top"
+          style={{
+            backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.36), rgba(10, 12, 14, 0.36)), url(${heroBackgroundImage})`,
+          }}
+        >
           <div className="hero-content">
             <h1>Dirt Work Services You Can Count On</h1>
             <img className="hero-logo" src={heroLogoImage} alt="Just Dig It logo" />
@@ -218,6 +230,10 @@ function App() {
           </div>
         </section>
 
+        <section className="quality-statement" aria-label="Quality statement">
+          <p>No Shortcuts. No Compromises. Just Quality Work.</p>
+        </section>
+
         <section className="reviews" id="reviews">
           <div className="section-head">
             <p>Client Feedback</p>
@@ -271,13 +287,37 @@ function App() {
           </div>
         </section>
 
-        <section className="contact" id="contact">
+        <section className="owner-bio" id="owner">
+          <img
+            className="owner-photo"
+            src={ownerPhotoImage}
+            alt="Owner Alan Eastman on-site"
+          />
+          <div className="owner-copy">
+            <p className="eyebrow">Meet The Owner</p>
+            <h2>Alan Eastman</h2>
+            <p>
+              Raised in the dirt and backed by decades of hands-on experience, Alan has spent most of his life around excavation equipment and construction sites. As the owner and operator of Just Dig It, with the unwavering support of his wife, Amanda, he combines a lifetime of practical knowledge with a commitment to integrity, precision, and quality workmanship. As a local, family-oriented business, every client becomes part of the Just Dig It family through honest communication, dependable service, and personal attention from the first site visit to the final grading. Their goal is simple: do the job right and build relationships that last long after the project is complete.
+            </p>
+          </div>
+        </section>
+
+        <section
+          className="contact"
+          id="contact"
+          style={{
+            backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.68), rgba(10, 12, 14, 0.68)), url(${mountainsImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
           <div>
             <p className="eyebrow">Start Your Project</p>
             <h2>Request a Free Site Visit</h2>
             <p>
-              Tell us what you are building and where. We will review your scope,
-              discuss constraints, and provide a straightforward estimate.
+              Tell us what you are building and where. Together we will review your scope,
+              discuss constraints, and provide you with a straightforward estimate.
             </p>
           </div>
           <form className="contact-form" onSubmit={(event) => event.preventDefault()}>
@@ -301,8 +341,19 @@ function App() {
       </main>
 
       <footer>
-        <p>Just Dig It Excavation and Septic</p>
+        <img
+          className="footer-logo-left"
+          src={heroLogoImage}
+          alt="Just Dig It logo"
+        />
+        <img
+          className="footer-logo"
+          src={justDigItTextLogoImage}
+          alt="Just Dig It text logo"
+        />
+        <p>Just Dig It, LLC.</p>
         <p>Serving local residential and commercial clients.</p>
+        <p>Copyright 2026</p>
       </footer>
     </div>
   );
