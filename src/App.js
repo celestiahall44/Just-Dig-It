@@ -127,7 +127,7 @@ function App() {
           <a href="#reviews">Reviews</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a className="call-now" href="tel:+15551234567">Call Now</a>
+        <a className="call-now" href="tel:+14062508477">Call Now: 1-406-250-8477</a>
       </header>
 
       <main>
@@ -157,7 +157,11 @@ function App() {
         <section className="about" id="about">
           <div>
             <p className="eyebrow">Why Choose Us</p>
-            <h2>Clear Communication.  Solid Results.</h2>
+            <h2>
+              Clear Communication.
+              <br />
+              Solid Results.
+            </h2>
             <p>
               We partner with homeowners, builders, and developers who need dependable
               heavy civil work and no excuses. Every project gets practical planning,
@@ -170,6 +174,10 @@ function App() {
             <li>Permit and inspection coordination support</li>
             <li>Detailed bids and realistic timelines</li>
           </ul>
+        </section>
+
+        <section className="quality-statement" aria-label="Quality statement">
+          <p>Integrity Below Ground. Excellence Above.</p>
         </section>
 
         <section className="services" id="services">
@@ -256,12 +264,14 @@ function App() {
             <article className="project-photo-card">
               {isProjectFading && (
                 <img
+                  key={`prev-${previousProjectImageIndex}`}
                   src={projectImages[previousProjectImageIndex]}
                   alt={`Project work photo ${previousProjectImageIndex + 1}`}
                   className="project-photo project-photo-previous"
                 />
               )}
               <img
+                key={`current-${activeProjectImageIndex}`}
                 src={projectImages[activeProjectImageIndex]}
                 alt={`Project work photo ${activeProjectImageIndex + 1}`}
                 className={`project-photo project-photo-current${isProjectFading ? ' is-fading' : ''}`}
@@ -346,7 +356,7 @@ function App() {
           className="contact"
           id="contact"
           style={{
-            backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.68), rgba(10, 12, 14, 0.68)), url(${mountainsImage})`,
+            backgroundImage: `linear-gradient(rgba(10, 12, 14, 0.78), rgba(10, 12, 14, 0.78)), url(${mountainsImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
